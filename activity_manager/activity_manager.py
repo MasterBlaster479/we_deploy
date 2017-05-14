@@ -4,7 +4,7 @@ app = Flask(__name__)
 # Import db models
 import models
 # Import flask resources
-import views
+from views import register as view_register
 
 @app.route('/')
 def hello_world():
@@ -17,5 +17,5 @@ if __name__ == '__main__':
     # Register manager
     models.register_manager(app)
     # Register resources
-    views.register_resources(app, '/api')
+    view_register.register_resources(app, '/api')
     app.run(port=3000)

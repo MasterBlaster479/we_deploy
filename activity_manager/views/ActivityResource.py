@@ -1,4 +1,4 @@
-from flask_restful import Resource, Api, request
+from flask_restful import Resource, fields, marshal_with, request
 import json
 from models import Activity, Manager
 
@@ -13,9 +13,3 @@ class ActivityResource(Resource):
             activity = eval(activity)
         activity_id = Activity(**activity)
         return activity_id, 201
-
-
-def register_resources(app, api_prefix):
-    api = Api(app)
-    # Activity Resource register
-    api.add_resource(ActivityResource, api_prefix + ActivityResource.route_base)
