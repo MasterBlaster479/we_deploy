@@ -3,11 +3,11 @@
 // Declare app level module which depends on views, and components
 var myApp = angular.module('myApp', [
   'ngRoute',
-    'ngResource',
-   'myApp.authentication',
   'myApp.view1',
   'myApp.view2',
-  'myApp.version'
+  'myApp.version',
+  'myApp.authentication'
+
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
