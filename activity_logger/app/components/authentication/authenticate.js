@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('myApp.authentication', ['ngResource', 'ngStorage'])
 .factory('Auth', function($resource, $rootScope, $sessionStorage, $q){
 
@@ -77,4 +79,4 @@ angular.module('myApp.authentication', ['ngResource', 'ngStorage'])
     auth.update = Profile.update;
 
     return auth;
-});
+}).value('version', '0.1');
