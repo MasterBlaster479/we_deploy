@@ -48,7 +48,7 @@ class UserResourceList(Resource):
         return new_user, 201
 
 class UserLogin(Resource):
-    route_base = '/users/login/'
+    route_base = '/users/login'
 
     def get(self):
         user, passwd = request.args.values()

@@ -7,7 +7,8 @@ def make_error(status_code, sub_code, message, action, errors=None):
         'sub_code': sub_code,
         'message': message,
         'action': action,
-        'errors': errors
+        'errors': errors,
+        'headers': {'Access-Control-Allow-Origin': '*'}
     })
     response.status_code = status_code
     return response

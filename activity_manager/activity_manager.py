@@ -10,6 +10,10 @@ from views import register as view_register
 def hello_world():
     return 'Hello World!'
 
+@app.after_request
+def mutate_response(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 if __name__ == '__main__':
     # Register models and bind db session with app session

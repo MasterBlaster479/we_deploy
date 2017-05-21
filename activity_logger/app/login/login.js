@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication'])
+angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication', 'myApp.server_error'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: '/app/login/login.html',
@@ -14,7 +14,7 @@ angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication'])
         $scope.login = function() {
             Auth.login($scope.user.login, $scope.user.password)
                 .then(function() {
-                    event.preventDefault();
+                    // event.preventDefault();
                     $location.path("/");
                 }, function(response) {
                     angular.forEach(response.data.errors, function(errors, field){
