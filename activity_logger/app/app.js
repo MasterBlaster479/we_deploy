@@ -8,7 +8,8 @@ var myApp = angular.module('myApp', [
     'myApp.version',
     'myApp.login',
     'myApp.register',
-    'myApp.profile'
+    'myApp.profile',
+    'myApp.activity'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     // $locationProvider.hashPrefix('!');

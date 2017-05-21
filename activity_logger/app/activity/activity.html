@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Short Description</th>
+            <th><a href="/activity/new"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="act in activities">
+            <td>{{act.start_date}}</td>
+            <td>{{act.end_date}}</td>
+            <td>{{act.short_desc}}</td>
+            <td><a href="/activity/edit/{{act.id}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+        </tr>
+    </tbody>
+</table>

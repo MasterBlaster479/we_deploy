@@ -16,6 +16,22 @@
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="AppCtrl">
+<div id="main">
+    <header>
+        <nav class="navbar navbar-default" ng-show="user" ng-cloack>
+            <a href="/activities">Activities</a>
+            <a href="/today_activities">Today's Activities</a>
+            <div class="right">
+                <span>{{user.first_name + " " + user.last_name}}</span>
+                <i class="glyphicon glyphicon-user"></i>
+                <ul>
+                    <a href="/profile">Profile</a>
+                    <a href="#" ng-click="logout()">Logout</a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>
 <ng-view>
 </ng-view>
 
@@ -43,6 +59,8 @@
 <script src="login/login.js"></script>
 <script src="register/register.js"></script>
 <script src="profile/profile.js"></script>
+<script src="activity/activity.js"></script>
+<script src="activity/ActivityResource.js"></script>
 <script src="app.js"></script>
 
 </body>

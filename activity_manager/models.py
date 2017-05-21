@@ -16,6 +16,8 @@ class User(db.Entity):
 class Activity(db.Entity):
     user_id = Required("User", index=True)
     manager_id = Required("Manager", index=True)
+    create_date = Required(datetime, default=lambda : datetime.now())
+    edit_date = Optional(datetime)
     start_date = Required(datetime, default=lambda : datetime.now())
     end_date = Required(datetime, default=lambda : datetime.now())
     description = Required(str)

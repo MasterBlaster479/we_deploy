@@ -11,6 +11,16 @@ form {
   padding: 0 0 0.5em;
 }
 
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+nav {
+    padding: 10px;
+}
 .menu:before {
   content: "[";
 }
