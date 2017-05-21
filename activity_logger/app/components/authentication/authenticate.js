@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('myApp.authentication', ['ngResource', 'ngStorage'])
-.factory('Auth', function($resource, $rootScope, $sessionStorage, $q){
+angular.module('myApp.authentication', ['ngResource', 'ngStorage', 'myApp.host_config'])
+.factory('Auth', function($resource, $rootScope, $sessionStorage, $q, HostConfig){
 
     /**
      *  User profile resource
      */
     var Profile = $resource('/api/users/', {}, {
         login: {
-            url: '/api/users/login',
+            url: HostConfig.getLocation() + '/api/users/login',
             params: {username:'@username', password: '@password'},
             method: "GET",
             isArray : false
@@ -18,7 +18,7 @@ angular.module('myApp.authentication', ['ngResource', 'ngStorage'])
             isArray : false
         },
         update: {
-            url: '/api/users/:id',
+            url: HostConfig.getLocation() + '/api/users/:id',
             method: "PUT",
             isArray : false
         }
