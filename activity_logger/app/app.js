@@ -14,9 +14,9 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     $locationProvider.html5Mode({enabled:true, requireBase:false});
     $routeProvider.
     when("/", {
-            templateUrl: "/app/index.html", controller:"AppCtrl"
+            templateUrl: '/app/app.html', controller:"AppCtrl"
         }).
-    otherwise({redirectTo: '/login'});
+    otherwise({redirectTo: '/'});
 }]).controller('AppCtrl', function ($scope, $rootScope, $location, Auth) {
     $rootScope.logout = function(){
         Auth.logout();

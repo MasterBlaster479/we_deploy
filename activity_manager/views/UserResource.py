@@ -10,6 +10,7 @@ user_resource_fields = {
     'email': fields.String,
     'login': fields.String,
     'active': fields.Boolean,
+    'password': fields.String,
 }
 
 class UserResource(Resource):

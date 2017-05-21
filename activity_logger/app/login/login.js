@@ -14,7 +14,7 @@ angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication', '
         $scope.login = function() {
             Auth.login($scope.user.login, $scope.user.password)
                 .then(function() {
-                    // event.preventDefault();
+                    event.preventDefault();
                     $location.path("/");
                 }, function(response) {
                     angular.forEach(response.data.errors, function(errors, field){

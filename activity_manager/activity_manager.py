@@ -13,6 +13,8 @@ def hello_world():
 @app.after_request
 def mutate_response(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     return response
 
 if __name__ == '__main__':

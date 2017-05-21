@@ -1,0 +1,15 @@
+<div id="main">
+    <header>
+        <nav class="navbar navbar-default" ng-show="user" ng-cloack>
+            <a href="/activites">Activities</a>
+            <div class="right">
+                <span>{{user.first_name + " " + user.last_name}}</span>
+                <i class="glyphicon glyphicon-user"></i>
+                <ul>
+                    <a href="/profile">Profile</a>
+                    <a href="#" ng-click="logout()">Logout</a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>

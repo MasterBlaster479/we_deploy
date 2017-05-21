@@ -6,7 +6,7 @@ angular.module('myApp.authentication', ['ngResource', 'ngStorage', 'myApp.host_c
     /**
      *  User profile resource
      */
-    var Profile = $resource('/api/users/', {}, {
+    var Profile = $resource(HostConfig.getLocation() + '/api/users/', {}, {
         login: {
             url: HostConfig.getLocation() + '/api/users/login',
             params: {username:'@username', password: '@password'},
