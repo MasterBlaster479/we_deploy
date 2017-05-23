@@ -7,7 +7,7 @@ angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication', '
             controller: 'LoginCtrl'
         });
     }])
-    .controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+    .controller('LoginCtrl', ['$scope', '$location', '$window', 'Auth' , function($scope, $location, $window, Auth) {
         $scope.user = {login: '', password: ''};
         $scope.failed = false;
         $scope.errors = {};
@@ -17,6 +17,10 @@ angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication', '
                     event.preventDefault();
                     $location.path("/");
                 }, function(response) {
+                    if (response.status == -1) {
+                        $window.alert("Server is not responding, report the problem to WeDeploy crew " +
+                            "wedeploy@liferay.com !");
+                    }
                     angular.forEach(response.data.errors, function(errors, field){
                         // notify form that field is invalid
                         $scope.form[field].$setValidity('server', false);
