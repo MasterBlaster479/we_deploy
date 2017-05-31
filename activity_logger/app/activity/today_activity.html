@@ -4,7 +4,6 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Short Description</th>
-            <th><a href="/activity/new"><i class="glyphicon glyphicon-plus-sign"></i></a></th>
         </tr>
     </thead>
     <tbody>
@@ -12,7 +11,6 @@
             <td>{{act.start_date}}</td>
             <td>{{act.end_date}}</td>
             <td>{{act.description | limitTo:80}}</td>
-            <td><a href="/activity/edit/{{act.id}}"><i class="glyphicon glyphicon-edit"></i></a></td>
         </tr>
     </tbody>
 </table>

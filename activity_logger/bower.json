@@ -14,7 +14,8 @@
     "angular-resource": "1.5.11",
     "ngstorage": "^0.3.11",
     "bootstrap": "3.3.6",
-    "angular-messages": "ng-messages#*"
+    "angular-messages": "ng-messages#*",
+    "angular-datepicker": "^2.0.3"
   },
   "resolutions": {
     "angular": "1.5.11",

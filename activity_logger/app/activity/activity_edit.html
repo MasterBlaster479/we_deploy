@@ -1,7 +1,14 @@
-<form ng-submit="save()" name="form">
-    <label for="start_date">Start Date</label>
-    <input id="start_date" type="datetime" ng-model="activity.start_date" />
-    <label for="end_date">End Date</label>
-    <input id="end_date" type="datetime" ng-model="activity.end_date" />
-    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"> Save </button>
+<form ng-submit="save()" name="form" novalidate>
+    <div class="form-group">
+        <label for="start_date">Start Date</label>
+        <input type="datetime-local" id="start_date" ng-model="activity.start_date" required/>
+        <br/>
+        <label for="end_date">End Date</label>
+        <input type="datetime-local" id="end_date" ng-model="activity.end_date" required/>
+        <br/>
+        <label for="desc">Description</label>
+        <textarea id="desc" rows="6" class="form-control" ng-model="activity.description" required></textarea>
+        <br/>
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"> Save </button>
+    </div>
 </form>
