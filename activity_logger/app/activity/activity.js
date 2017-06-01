@@ -23,14 +23,19 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
         });
     }])
     .controller('ActivityNewCtrl', ['$scope', '$location', 'Activity',function($scope, $location, Activity) {
-
-    }])
-    .controller('ActivityEditCtrl', ['$scope', '$location', '$routeParams', 'Activity', function($scope, $location, $routeParams, Activity) {
+        $scope.activity = {
+            user_id: $scope.user.id,
+            description: '',
+            start_date: new Date(),
+            end_date: new Date()
+        };
         $scope.save = function(){
-            Activity.resource.update({id: this.activity.id}, this.activity, function(response){
-                console.log(reponse)
+            Activity.static_resource.save(this.activity, function(response){
+                $location.path('/today_activities')
             });
         };
+    }])
+    .controller('ActivityEditCtrl', ['$scope', '$location', '$routeParams', 'Activity', function($scope, $location, $routeParams, Activity) {
         Activity.resource.get({id: $routeParams.id}, function(response) {
             $scope.activity = {
                 id: response.id,
@@ -40,7 +45,12 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
                 start_date: new Date(response.start_date),
                 end_date: new Date(response.end_date)
             };
-        })
+        });
+        $scope.save = function(){
+            Activity.resource.update({id: this.activity.id}, this.activity, function(response){
+                console.log(response);
+            });
+        };
     }])
     .controller('ActivityTodayCtrl', ['$scope', '$location', 'Activity',function($scope, $location, Activity) {
         Activity.static_resource.today_activities().$promise.then(function (response) {

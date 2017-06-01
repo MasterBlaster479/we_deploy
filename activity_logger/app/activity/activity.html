@@ -9,9 +9,9 @@
     </thead>
     <tbody>
         <tr ng-repeat="act in activities">
-            <td>{{act.start_date}}</td>
-            <td>{{act.end_date}}</td>
-            <td>{{act.description | limitTo:80}}</td>
+            <td>{{act.start_date  | date}}</td>
+            <td>{{act.end_date | date}}</td>
+            <td>{{act.description | limitTo:60}}</td>
             <td><a href="/activity/edit/{{act.id}}"><i class="glyphicon glyphicon-edit"></i></a></td>
         </tr>
     </tbody>

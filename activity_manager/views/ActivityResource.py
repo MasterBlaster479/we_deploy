@@ -1,7 +1,7 @@
 from flask_restful import Resource, fields, marshal_with, request, abort
 import json
 from pony.orm.serialization import to_json, to_dict
-from pony.orm import rollback
+from pony.orm import rollback, select
 from models import Activity, Manager
 from datetime import date, datetime, timedelta
 from dateutil import parser
@@ -24,8 +24,6 @@ class ActivityResource(Resource):
 
     @marshal_with(activity_resource_fields)
     def put(self, id):
-        import pdb;pdb.set_trace()
-        # data = parser.parse_args()
         data = json.loads(request.data)
         data.pop('create_date'), data.pop('id')
         new_data = {
@@ -43,14 +41,26 @@ class ActivityResourceList(Resource):
 
     @marshal_with(activity_resource_fields)
     def get(self):
-        return Activity.select()[:]
+        user_id = request.args.get('user_id')
+        if user_id:
+            query = Activity.select(lambda a: a.user_id.id == user_id)
+        else:
+            query = Activity.select()
+        return query[:]
 
+    @marshal_with(activity_resource_fields)
     def post(self):
         data = request.data
         activity_data = json.loads(data)
+        activity_data.update({
+            'start_date': activity_data.get('start_date') and parser.parse(activity_data['start_date']),
+            'end_date': activity_data.get('end_date') and parser.parse(activity_data['end_date']),
+            'edit_date': datetime.now()
+        })
         manager_id = Manager.get_session_manager()
         if isinstance(activity_data, (unicode, str,)):
             activity_data = eval(activity_data)
+        activity_data.update(manager_id=manager_id)
         activity_id = Activity(**activity_data)
         return activity_id, 201
 
@@ -67,7 +77,8 @@ class ActivityResourceMethod(Resource):
             abort(404)
 
     def today_activities(self, *args, **kwargs):
-        date_start = datetime.now()
-        data = Activity.select(lambda act: act.edit_date <= datetime.now())[:]
-        print data
-        return data
+        query = select(a for a in Activity if a.edit_date.date() == date.today())
+        user_id = request.args.get('user_id')
+        if user_id:
+            query.filter(lambda a: a.user_id.id == user_id)
+        return query[:]

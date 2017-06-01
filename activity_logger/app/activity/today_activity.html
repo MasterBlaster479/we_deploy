@@ -3,14 +3,16 @@
         <tr>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Last Edit Date</th>
             <th>Short Description</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="act in activities">
-            <td>{{act.start_date}}</td>
-            <td>{{act.end_date}}</td>
-            <td>{{act.description | limitTo:80}}</td>
+            <td>{{act.start_date | date}}</td>
+            <td>{{act.end_date | date}}</td>
+            <td>{{act.edit_date | date}}</td>
+            <td>{{act.description | limitTo:60}}</td>
         </tr>
     </tbody>
 </table>
