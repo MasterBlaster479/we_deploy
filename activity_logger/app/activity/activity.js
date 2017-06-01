@@ -49,6 +49,7 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
         $scope.save = function(){
             Activity.resource.update({id: this.activity.id}, this.activity, function(response){
                 console.log(response);
+                $location.path('/today_activities')
             });
         };
     }])
