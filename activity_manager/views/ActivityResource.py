@@ -34,7 +34,6 @@ class ActivityResource(Resource):
             'edit_date': datetime.now()
         }
         data.update(new_data)
-        data = {'description': False}
         act = Activity.get(id=id)
         act.set(**data)
         return Activity[id], 201

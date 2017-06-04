@@ -41,7 +41,7 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
             });
         };
     }])
-    .controller('ActivityEditCtrl', ['$scope', '$location', '$routeParams', 'Activity', function($scope, $location, $routeParams, Activity) {
+    .controller('ActivityEditCtrl', ['$scope', '$location', '$routeParams', '$window', 'Activity', function($scope, $location, $routeParams, $window, Activity) {
         Activity.resource.get({id: $routeParams.id}, function(response) {
             $scope.activity = {
                 id: response.id,
