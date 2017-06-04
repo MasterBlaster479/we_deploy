@@ -5,6 +5,7 @@ from pony.orm import rollback, select
 from models import Activity, Manager
 from datetime import date, datetime, timedelta
 from dateutil import parser
+from logger_decorator import activity_logger
 
 activity_resource_fields = {
     'id': fields.Integer,
@@ -23,6 +24,7 @@ class ActivityResource(Resource):
         return Activity[id]
 
     @marshal_with(activity_resource_fields)
+    @activity_logger
     def put(self, id):
         data = json.loads(request.data)
         data.pop('create_date'), data.pop('id')
@@ -32,6 +34,7 @@ class ActivityResource(Resource):
             'edit_date': datetime.now()
         }
         data.update(new_data)
+        data = {'description': False}
         act = Activity.get(id=id)
         act.set(**data)
         return Activity[id], 201
@@ -49,6 +52,7 @@ class ActivityResourceList(Resource):
         return query[:]
 
     @marshal_with(activity_resource_fields)
+    @activity_logger
     def post(self):
         data = request.data
         activity_data = json.loads(data)

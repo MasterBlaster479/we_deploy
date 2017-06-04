@@ -22,7 +22,7 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
             $scope.activities = response;
         });
     }])
-    .controller('ActivityNewCtrl', ['$scope', '$location', 'Activity',function($scope, $location, Activity) {
+    .controller('ActivityNewCtrl', ['$scope', '$location', '$window', 'Activity',function($scope, $location, $window, Activity) {
         $scope.activity = {
             user_id: $scope.user.id,
             description: '',
@@ -31,7 +31,13 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
         };
         $scope.save = function(){
             Activity.static_resource.save(this.activity, function(response){
+                $window.alert("Successfully made an activity !");
                 $location.path('/today_activities')
+            }, function(error){
+                    if (error.status == -1) {
+                        $window.alert("Problem with recording your activity, please report the problem to WeDeploy crew " +
+                            "wedeploy@liferay.com !");
+                    }
             });
         };
     }])
@@ -39,6 +45,7 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
         Activity.resource.get({id: $routeParams.id}, function(response) {
             $scope.activity = {
                 id: response.id,
+                user_id: $scope.user.id,
                 description: response.description,
                 create_date: new Date(response.create_date),
                 edit_date: new Date(response.edit_date),
@@ -50,6 +57,11 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
             Activity.resource.update({id: this.activity.id}, this.activity, function(response){
                 console.log(response);
                 $location.path('/today_activities')
+            }, function(error){
+                    if (error.status == -1) {
+                        $window.alert("Problem with recording your activity, please report the problem to WeDeploy crew " +
+                            "wedeploy@liferay.com !");
+                    }
             });
         };
     }])

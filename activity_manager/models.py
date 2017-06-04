@@ -2,7 +2,7 @@ from pony.orm import *
 from datetime import date, datetime
 import socket
 db = Database()
-db.bind('postgres', user='postgres', password='postgres', host='localhost', database='we_deploy')
+db.bind('postgres', user='postgres', password='postgres', host='localhost', port=5433, database='we_deploy')
 
 class User(db.Entity):
     first_name = Required(str)
@@ -12,6 +12,7 @@ class User(db.Entity):
     password = Required(str)
     active = Optional(bool, default=True)
     activities = Set("Activity", lazy=True)
+    activity_logs = Set("ActivityLog", lazy=True)
 
 class Activity(db.Entity):
     user_id = Required("User", index=True)
@@ -21,11 +22,22 @@ class Activity(db.Entity):
     start_date = Required(datetime, default=lambda : datetime.now())
     end_date = Required(datetime, default=lambda : datetime.now())
     description = Required(str)
+    activity_logs = Set("ActivityLog", lazy=True)
+
+class ActivityLog(db.Entity):
+    _table_ = 'activity_log'
+    user_id = Required("User", index=True)
+    manager_id = Required("Manager", index=True)
+    create_date = Required(datetime, default=lambda : datetime.now())
+    activity_id = Optional("Activity", index=True)
+    data = Required(Json)
+    error_msg = Required(str)
 
 class Manager(db.Entity):
     host_id = Required(str, index=True)
     create_date = Required(datetime, default=lambda : datetime.now())
     activities = Set("Activity", lazy=True)
+    activity_logs = Set("ActivityLog", lazy=True)
 
     @classmethod
     def get_session_manager(self):
