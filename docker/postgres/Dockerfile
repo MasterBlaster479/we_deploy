@@ -23,14 +23,12 @@ RUN chown postgres:postgres /home/postgres/backup/log
 
 USER postgres
 COPY backup/we_deploy.backup /home/postgres/backup/
-RUN service postgresql start && sleep 40s && createdb -O postgres we_deploy && pg_restore -d we_deploy  /home/postgres/backup/we_deploy.backup
+RUN service postgresql start && sleep 40s && createdb -O postgres we_deploy && pg_restore -d we_deploy  /home/postgres/backup/we_deploy.backup \
+&& psql -U postgres -d we_deploy -c "ALTER USER postgres WITH password 'postgres' "
 
 USER root
 RUN cat /etc/postgresql/9.5/main/postgresql.conf | sed -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" > /etc/postgresql/9.5/main/tmp_postgresql.conf
 RUN mv /etc/postgresql/9.5/main/tmp_postgresql.conf /etc/postgresql/9.5/main/postgresql.conf
-
-#RUN cat /etc/postgresql/9.5/main/pg_hba.conf | sed -e "s/host    all             all             127.0.0.1\/32            md5/host    all             all             0.0.0.0\/0            trust/" > /etc/postgresql/9.5/main/tmp_pg_hba.conf
-#RUN mv /etc/postgresql/9.5/main/tmp_pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
 
 COPY pg_hba.conf /etc/postgresql/9.5/main/
 RUN chown postgres /etc/postgresql/9.5/main/pg_hba.conf
