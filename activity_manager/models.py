@@ -2,7 +2,7 @@ from pony.orm import *
 from datetime import date, datetime
 import socket
 db = Database()
-db.bind('postgres', user='postgres', password='postgres', host='localhost', port=5433, database='we_deploy')
+db.bind('postgres', user='postgres', password='postgres', host='127.0.0.1', port=5433, database='we_deploy')
 
 class User(db.Entity):
     first_name = Required(str)
