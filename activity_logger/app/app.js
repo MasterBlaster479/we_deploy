@@ -16,7 +16,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     $locationProvider.html5Mode({enabled:true, requireBase:false});
     $routeProvider.
     when("/", {
-            templateUrl: '/app/app.html', controller:"AppCtrl"
+            templateUrl: '/app.html', controller:"AppCtrl"
         }).
     otherwise({redirectTo: '/'});
 }]).controller('AppCtrl', function ($scope, $rootScope, $location, Auth) {
@@ -30,7 +30,7 @@ myApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, A
     Auth.init();
     $rootScope.$on('$routeChangeStart', function (event, next) {
         if (!Auth.isLoggedIn()){
-            if (next.templateUrl === '/app/login/login.html' || next.templateUrl === '/app/register/register.html') {
+            if (next.templateUrl === '/login/login.html' || next.templateUrl === '/register/register.html') {
             }
             else {
                 event.preventDefault();

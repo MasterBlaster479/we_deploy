@@ -4,16 +4,16 @@ angular.module('myApp.activity', ['ngRoute', 'ngResource', 'myApp.ActivityResour
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when('/activities', {
-                templateUrl: '/app/activity/activity.html',
+                templateUrl: '/activity/activity.html',
                 controller: 'ActivityCtrl'
         }).when('/activity/new', {
-            templateUrl: '/app/activity/activity_edit.html',
+            templateUrl: '/activity/activity_edit.html',
             controller: 'ActivityNewCtrl'
         }).when('/activity/edit/:id', {
-            templateUrl: '/app/activity/activity_edit.html',
+            templateUrl: '/activity/activity_edit.html',
             controller: 'ActivityEditCtrl'
         }).when('/today_activities', {
-            templateUrl: '/app/activity/today_activity.html',
+            templateUrl: '/activity/today_activity.html',
             controller: 'ActivityTodayCtrl'
         })
     }])

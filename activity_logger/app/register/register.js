@@ -3,7 +3,7 @@
 angular.module('myApp.register', ['ngRoute', 'ngMessages', 'myApp.authentication'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/register', {
-            templateUrl: '/app/register/register.html',
+            templateUrl: '/register/register.html',
             controller: 'RegisterCtrl'
         });
     }])

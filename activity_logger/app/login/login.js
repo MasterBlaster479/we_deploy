@@ -3,7 +3,7 @@
 angular.module('myApp.login', ['ngRoute','ngMessages', 'myApp.authentication', 'myApp.server_error'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: '/app/login/login.html',
+            templateUrl: '/login/login.html',
             controller: 'LoginCtrl'
         });
     }])
