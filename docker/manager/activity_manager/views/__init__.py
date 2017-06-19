@@ -1,2 +1,0 @@
-import UserResource
-import ActivityResource
